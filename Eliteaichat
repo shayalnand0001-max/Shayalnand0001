@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite AI Companion | Premium Rental</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: #111111;
+            --accent: #00d2ff; 
+            --text: #ffffff;
+            --text-dim: #888888;
+            --border: #222222;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 3px;
+            margin: 0;
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .header p { color: var(--text-dim); margin-top: 10px; font-weight: 300; }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 28px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        .price-tag {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .price-tag span { font-size: 1.2rem; color: var(--text-dim); font-weight: 400; }
+
+        .address-container {
+            text-align: left;
+            margin-top: 35px;
+            background: #000;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .address-box {
+            margin-bottom: 20px;
+        }
+
+        .address-box:last-child { margin-bottom: 0; }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        .address-text {
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+            color: #eee;
+            background: #111;
+            padding: 12px;
+            border-radius: 8px;
+            display: block;
+            border: 1px solid #222;
+        }
+
+        .instructions {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-top: 25px;
+            padding: 15px;
+            border-top: 1px solid #222;
+        }
+
+        .contact-btn {
+            margin-top: 25px;
+            background: var(--accent);
+            color: #000;
+            padding: 16px;
+            text-decoration: none;
+            border-radius: 12px;
+            display: block;
+            font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+        }
+
+        .support-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Elite AI Companion</h1>
+        <p>Premium System Rental • Active License</p>
+    </div>
+
+    <div class="pricing-card">
+        <h2>Full Access Rental</h2>
+        <div class="price-tag">$29<span>/month</span></div>
+        
+        <p style="color: var(--text-dim);">Send <b>$29 USD</b> equivalent to one of the addresses below to activate your rental license.</p>
+
+        <div class="address-container">
+            <div class="address-box">
+                <span class="label">Solana (Recommended - Low Fees)</span>
+                <span class="address-text">7S8x4rVmAuazq8iMHHwb3T1cMCv5wXnUxiRjwgyYGh5i</span>
+            </div>
+
+            <div class="address-box">
+                <span class="label">Ethereum / USDT / USDC</span>
+                <span class="address-text">0x7fd0d4addbee109ef76b12adbae72ec2b56312f1</span>
+            </div>
+
+            <div class="address-box">
+                <span class="label">Bitcoin</span>
+                <span class="address-text">bc1qp5xzq2aa4mz3qejp42wqvaandtgc4qguppz9cj</span>
+            </div>
+
+            <div class="address-box">
+                <span class="label">Doge Coin</span>
+                <span class="address-text">D8BB6wcA4pYkvCBrT5ma4tdxavsKJwxmwz</span>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <strong>Activation:</strong> After payment, click the button below or email your Transaction ID to <br>
+            <a href="mailto:Shayalnand0001@gmail.com" class="support-link">Shayalnand0001@gmail.com</a>
+        </div>
+
+        <a href="mailto:Shayalnand0001@gmail.com?subject=Payment%20Sent%20for%20Elite%20AI%20Companion" class="contact-btn">Verify Payment & Get Access</a>
+    </div>
+
+</body>
+</html>
