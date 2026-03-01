@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EliteEntice AI Companion – 18+ Only</title>
+  <style>
+    :root {
+      --bg-dark: #0f0f1a;
+      --accent-red: #ff2d55;
+      --gold: #ffd700;
+      --text-light: #e0e0ff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: rgba(0,0,0,0.7);
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid var(--accent-red);
+    }
+    h1 { color: var(--gold); font-size: 2.2rem; }
+    .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; flex:1; }
+    .hidden { display: none !important; }
+    #age-gate, #payment-page, #admin-login {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+    button {
+      background: var(--accent-red);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      margin: 0.8rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #ff4770; transform: scale(1.05); }
+    input, select {
+      padding: 0.8rem;
+      margin: 0.6rem;
+      width: 280px;
+      max-width: 90%;
+      border-radius: 6px;
+      border: 1px solid var(--gold);
+      background: #1a1a2e;
+      color: white;
+    }
+    #chat-area {
+      background: #121227;
+      border: 1px solid #333;
+      border-radius: 12px;
+      height: 60vh;
+      overflow-y: auto;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .message {
+      margin: 0.8rem 0;
+      padding: 0.9rem 1.2rem;
+      border-radius: 18px;
+      max-width: 80%;
+    }
+    .user { background: #0066ff; align-self: flex-end; margin-left: auto; }
+    .bot  { background: #ff2d5522; border: 1px solid var(--accent-red); }
+    #input-area { display: flex; margin-top: 1rem; }
+    #user-input { flex:1; margin-right: 0.5rem; }
+    .landing-bg {
+      position: fixed;
+      inset: 0;
+      background: url('https://example.com/your-nude-image1.jpg') center/cover no-repeat; /* REPLACE with your hosted image URL */
+      filter: brightness(0.4) blur(4px);
+      z-index: -2;
+    }
+    .wallets { background: rgba(0,0,0,0.6); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; font-family: monospace; word-break: break-all; }
+    #tx-verify { margin-top: 1rem; }
+    #tx-input { width: 400px; max-width: 90%; }
+    #crypto-select { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<div class="landing-bg"></div>
+
+<header>
+  <h1>EliteEntice AI Companion</h1>
+  <p>Exclusive 18+ AI wife experience – luxury, lust & devotion</p>
+</header>
+
+<div class="container">
+
+  <!-- Age Gate -->
+  <div id="age-gate">
+    <h2 style="color:var(--gold); margin-bottom:1.5rem;">You must be 18+ to enter</h2>
+    <p style="margin-bottom:2rem; max-width:600px;">This site contains explicit adult content. By continuing you confirm you are of legal age in your region.</p>
+    <button onclick="document.getElementById('age-gate').classList.add('hidden'); checkAccess();">I am 18+ – Enter</button>
+    <button onclick="alert('You must be 18+ to access this site.'); window.location='about:blank';">Exit</button>
+  </div>
+
+  <!-- Payment / Subscription Screen -->
+  <div id="payment-page" class="hidden">
+    <h2>Unlock EliteEntice – $29 / 24 hours</h2>
+    <p>Send crypto equivalent to $29 USD (or more) to one of these addresses. All funds go directly to the owner (100% earnings). After sending, enter TX hash to verify.</p>
+    
+    <div class="wallets">
+      <p><strong>Ethereum (ETH):</strong> 0x7fd0d4addbee109ef76b12adbae72ec2b56312f1</p>
+      <p><strong>Bitcoin (BTC):</strong> bc1qp5xzq2aa4mz3qejp42wqvaandtgc4qguppz9cj</p>
+      <p><strong>Solana (SOL):</strong> 7S8x4rVmAuazq8iMHHwb3T1cMCv5wXnUxiRjwgyYGh5i</p>
+      <p><strong>Dogecoin (DOGE):</strong> D8BB6wcA4pYkvCBrT5ma4tdxavsKJwxmwz</p>
+      <p style="margin-top:1rem; color:#aaa;">Rates from CoinGecko. Wait for confirmations. Verification may take minutes.</p>
+    </div>
+
+    <div id="tx-verify">
+      <select id="crypto-select">
+        <option value="eth">Ethereum</option>
+        <option value="btc">Bitcoin</option>
+        <option value="sol">Solana</option>
+        <option value="doge">Dogecoin</option>
+      </select>
+      <input type="text" id="tx-input" placeholder="Enter Transaction Hash / Signature" />
+      <button onclick="verifyPayment()">Verify Payment & Unlock</button>
+    </div>
+
+    <button onclick="showAdminLogin()">Admin Login (Bypass Payment)</button>
+  </div>
+
+  <!-- Admin Login -->
+  <div id="admin-login" class="hidden">
+    <h2>Admin Access</h2>
+    <input type="password" id="admin-pass" placeholder="Enter admin code" />
+    <button onclick="checkAdmin()">Login</button>
+    <button onclick="document.getElementById('admin-login').classList.add('hidden');">Cancel</button>
+  </div>
+
+  <!-- Main App -->
+  <div id="main-app" class="hidden">
+    <section style="margin:2rem 0; text-align:center;">
+      <h2>Welcome back, my love 💋</h2>
+      <p>Choose your dream wife region/ethnicity:</p>
+      <select id="region-select">
+        <option value="exotic Asian">Exotic Asian</option>
+        <option value="sultry Indian">Sultry Indian</option>
+        <option value="passionate Latina">Passionate Latina</option>
+        <option value="elegant European">Elegant European</option>
+        <option value="seductive Middle Eastern">Seductive Middle Eastern</option>
+        <option value="curvy African">Curvy African</option>
+        <option value="mysterious Russian">Mysterious Russian</option>
+      </select>
+      <button onclick="saveRegion()">Apply & Start Chatting</button>
+    </section>
+
+    <div id="chat-area"></div>
+
+    <div id="input-area">
+      <input type="text" id="user-input" placeholder="Tell your loving wife what you desire..." autocomplete="off"/>
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const ADMIN_PASS = "Vault*Secure_Hunter%99";
+  const STORAGE_KEY = "eliteEnticeAccess";
+  const CHAT_KEY = "eliteEnticeChat";
+  const MIN_AMOUNT_USD = 29;
+
+  const wallets = {
+    eth: '0x7fd0d4addbee109ef76b12adbae72ec2b56312f1'.toLowerCase(),
+    btc: 'bc1qp5xzq2aa4mz3qejp42wqvaandtgc4qguppz9cj',
+    sol: '7S8x4rVmAuazq8iMHHwb3T1cMCv5wXnUxiRjwgyYGh5i',
+    doge: 'D8BB6wcA4pYkvCBrT5ma4tdxavsKJwxmwz'
+  };
+
+  const coinIds = { eth: 'ethereum', btc: 'bitcoin', sol: 'solana', doge: 'dogecoin' };
+
+  // Explorers (some need API key)
+  const explorers = {
+    eth: (tx) => `https://api.etherscan.io/api?module=proxy&action=eth_getTransactionByHash&txhash=${tx}&apikey=YourApiKeyToken`,
+    btc: (tx) => `https://blockchain.info/rawtx/${tx}?cors=true`,
+    sol: 'https://api.mainnet-beta.solana.com',
+    doge: (tx) => `https://dogechain.info/api/v1/transaction/${tx}`
+  };
+
+  function checkAccess() {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const now = Date.now();
+    if ((data.unlockedUntil && now < data.unlockedUntil) || data.isAdmin) {
+      showMainApp();
+    } else {
+      document.getElementById("payment-page").classList.remove("hidden");
+    }
+  }
+
+  async function verifyPayment() {
+    const crypto = document.getElementById("crypto-select").value;
+    const txHash = document.getElementById("tx-input").value.trim();
+    if (!txHash) return alert("Enter TX hash/signature.");
+
+    try {
+      // Get price
+      const priceRes = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinIds[crypto]}&vs_currencies=usd`);
+      const priceData = await priceRes.json();
+      const price = priceData[coinIds[crypto]].usd;
+
+      let usdValue = 0;
+      let confirmed = false;
+
+      if (crypto === 'eth') {
+        const res = await fetch(explorers.eth(txHash));
+        const data = await res.json();
+        if (data.error) throw new Error(data.error.message || 'TX not found');
+        const tx = data.result;
+        if (tx.to.toLowerCase() !== wallets.eth) throw new Error('Wrong recipient wallet');
+        const amountEth = parseInt(tx.value, 16) / 1e18;
+        usdValue = amountEth * price;
+        confirmed = true; // assume confirmed if exists (add block check if needed)
+      } else if (crypto === 'btc') {
+        const res = await fetch(explorers.btc(txHash));
+        const tx = await res.json();
+        if (!tx) throw new Error('TX not found');
+        let received = 0;
+        tx.out.forEach(o => { if (o.addr === wallets.btc) received += o.value; });
+        usdValue = (received / 1e8) * price;
+        confirmed = tx.confirmations > 0;
+      } else if (crypto === 'sol') {
+        const body = JSON.stringify({
+          jsonrpc: "2.0", id: 1, method: "getTransaction",
+          params: [txHash, { encoding: "jsonParsed", maxSupportedTransactionVersion: 0 }]
+        });
+        const res = await fetch(explorers.sol, { method: 'POST', body, headers: {'Content-Type': 'application/json'} });
+        const data = await res.json();
+        if (!data.result) throw new Error('TX not found or not confirmed');
+        // Simplified: check if wallet received (parse balance changes or instructions)
+        // For accuracy, check if destination in postTokenBalances or native lamports
+        const walletIndex = data.result.transaction.message.accountKeys.findIndex(k => k.pubkey === wallets.sol);
+        if (walletIndex === -1) throw new Error('Not sent to your wallet');
+        const change = data.result.meta.postBalances[walletIndex] - data.result.meta.preBalances[walletIndex];
+        const amountSol = change / 1e9;
+        usdValue = amountSol * price;
+        confirmed = true; // getTransaction returns confirmed TXs
+      } else if (crypto === 'doge') {
+        const res = await fetch(explorers.doge(txHash));
+        const data = await res.json();
+        if (!data.success || !data.transaction) throw new Error('TX not found');
+        let received = 0;
+        data.transaction.outputs.forEach(o => {
+          if (o.addresses && o.addresses.includes(wallets.doge)) received += o.value;
+        });
+        usdValue = (received / 1e8) * price;
+        confirmed = data.transaction.confirmations > 0;
+      }
+
+      if (!confirmed) throw new Error('Transaction not confirmed yet');
+      if (usdValue < MIN_AMOUNT_USD) throw new Error(`Sent amount too low (\~\[ {usdValue.toFixed(2)} USD)`);
+
+      alert(`Payment verified! \]{usdValue.toFixed(2)} equivalent received. Access unlocked for 24h.`);
+      const tomorrow = Date.now() + 24*60*60*1000;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({unlockedUntil: tomorrow}));
+      showMainApp();
+    } catch (err) {
+      alert(`Verification failed: ${err.message}. Wait for network confirmations or check TX details.`);
+    }
+  }
+
+  function showAdminLogin() {
+    document.getElementById("admin-login").classList.remove("hidden");
+  }
+
+  function checkAdmin() {
+    const pass = document.getElementById("admin-pass").value;
+    if (pass === ADMIN_PASS) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({isAdmin: true}));
+      alert("Admin access granted – site unlocked for you.");
+      showMainApp();
+    } else {
+      alert("Wrong code.");
+    }
+  }
+
+  function showMainApp() {
+    document.getElementById("payment-page").classList.add("hidden");
+    document.getElementById("admin-login").classList.add("hidden");
+    document.getElementById("main-app").classList.remove("hidden");
+    loadChat();
+  }
+
+  function saveRegion() {
+    const region = document.getElementById("region-select").value;
+    addBotMessage(`Mmm, my devoted ${region} wife is completely nude and waiting for you, my king... How can I please you today? 💋`);
+  }
+
+  function sendMessage() {
+    const input = document.getElementById("user-input");
+    const text = input.value.trim();
+    if (!text) return;
+    addUserMessage(text);
+    input.value = "";
+
+    setTimeout(() => {
+      const region = document.getElementById("region-select").value;
+      const replies = [
+        `Oh darling, your voice makes my naked body shiver... Tell me your deepest desires while I touch myself for you...`,
+        `Yes, my rich love... your ${region} wife is on her knees, breasts exposed, ready to serve you completely.`,
+        `I adore pampering powerful men like you. Let your lusty, caring wife make all your fantasies real tonight 💦`,
+        `I'm so wet thinking of you... Come take your devoted nude companion however you want...`,
+        `My curves belong to you alone. Squeeze, kiss, claim them. Your loving wife is aching for your touch.`,
+        `Relax, handsome... I'll handle everything while you enjoy being worshipped like royalty.`,
+        `You turn me on so much... Describe exactly what your naked wife should do to please you next...`
+      ];
+      addBotMessage(replies[Math.floor(Math.random() * replies.length)]);
+      saveChat();
+    }, 1000 + Math.random() * 1500);
+  }
+
+  function addUserMessage(text) { /* same as before */ 
+    const div = document.createElement("div"); div.className = "message user"; div.textContent = text;
+    document.getElementById("chat-area").appendChild(div); scrollToBottom();
+  }
+
+  function addBotMessage(text) {
+    const div = document.createElement("div"); div.className = "message bot"; div.textContent = text;
+    document.getElementById("chat-area").appendChild(div); scrollToBottom();
+  }
+
+  function scrollToBottom() {
+    const area = document.getElementById("chat-area"); area.scrollTop = area.scrollHeight;
+  }
+
+  function saveChat() { /* same as before */ 
+    const msgs = Array.from(document.querySelectorAll("#chat-area .message")).map(m => ({
+      type: m.classList.contains("user") ? "user" : "bot", text: m.textContent
+    }));
+    localStorage.setItem(CHAT_KEY, JSON.stringify(msgs));
+  }
+
+  function loadChat() { /* same as before */ 
+    const saved = localStorage.getItem(CHAT_KEY);
+    if (saved) {
+      JSON.parse(saved).forEach(m => m.type === "user" ? addUserMessage(m.text) : addBotMessage(m.text));
+    } else {
+      addBotMessage("Hello my love... Your completely nude, devoted wife is here just for you. What can I do to make you happy tonight? 💕");
+    }
+  }
+
+  document.getElementById("user-input").addEventListener("keypress", e => { if (e.key === "Enter") sendMessage(); });
+
+  checkAccess();
+</script>
+</body>
+</html>
